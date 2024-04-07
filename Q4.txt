@@ -1,0 +1,39 @@
+qty = int(input("How many items do you want to send?"))
+box1 = 1
+max_weight = 20
+box_weight = 0
+box = 0
+total_weight = 0
+for item in range(1,qty+1):
+      weight = int(input(f"Please enter the weight in kilograms of item {item}:"))
+      total_weight += weight
+      if (weight <= 0 or weight > 10):
+        print("Error, this weight is outside the allowable range.")
+        box = 0
+        break
+      elif (box_weight + weight) < max_weight:
+        box_weight += weight
+      elif (box_weight + weight) >= max_weight:
+        print("This item won't fit, send the box, start a new box and add this item.")
+        box1 += 1
+        box_weight = 0 #zero the scales to start over
+        if box_weight + weight < max_weight:
+           box_weight += weight
+else:
+  print("that's the last item, send the box.")
+
+print()
+boxes = (box1 + box)
+print("The total number of boxes sent is:")
+print(boxes)    
+print()
+print("The total kg weight of the boxes sent is:")
+print(total_weight)
+print()
+unused_packaging = (boxes * 20) - (total_weight)
+print("The total kg weight of non-optimal packaging is:")
+print(unused_packaging)
+print()
+
+
+
